@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <SearchView
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="Nhap o day"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="13dp"
+        android:hint="chon tu ngay"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="13dp"
+        android:hint="cden ngay"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        />
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal">
+    <Spinner
+        android:id="@+id/spCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        />
+        <Button
+            android:id="@+id/btnSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Search"
+            android:background="@color/red"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvTong"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="12dp"
+        android:layout_marginLeft="12dp"
+        android:textColor="@color/green"
+        android:textSize="16dp"
+        android:text="Tong: "
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+    />
+</LinearLayout>
