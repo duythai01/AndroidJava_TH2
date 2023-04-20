@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -68,4 +69,23 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         contentValues.put("date", item.getDate());
         return sq.insert("items", null, contentValues);
     }
+
+    public List<Item> getItemByDate(String date) {
+        Log.i("Date",date);
+
+        List<Item> list = new ArrayList<>();
+        String whereClause = "date like ?";
+        String[] whereArgs = {date};
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        Cursor rs = sqLiteDatabase.query("items", null, whereClause, whereArgs,null,null,null);
+        while (rs != null && rs.moveToNext()) {
+            int id  = rs.getInt(0);
+            String title = rs.getString(1);
+            String category = rs.getString(2);
+            String price = rs.getString(3);
+            list.add(new Item( id, title,category,price,date));
+        }
+        return  list;
+    }
+
 }
