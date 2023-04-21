@@ -109,5 +109,58 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return sq.delete("items", whereClause, whereArgs);
     }
 
+    public List<Item> getItemByTitle(String title) {
+        Log.i("Date",title);
 
+        List<Item> list = new ArrayList<>();
+        String whereClause = "title like ?";
+        String[] whereArgs = {"%"+title+"%"};
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        Cursor rs = sqLiteDatabase.query("items", null, whereClause, whereArgs,null,null,null);
+        while (rs != null && rs.moveToNext()) {
+            int id  = rs.getInt(0);
+            String t = rs.getString(1);
+            String category = rs.getString(2);
+            String price = rs.getString(3);
+            String date = rs.getString(4);
+            list.add(new Item( id, t,category,price,date));
+        }
+        return  list;
+    }
+    public List<Item> getItemByCategory(String cate) {
+        Log.i("Date",cate);
+
+        List<Item> list = new ArrayList<>();
+        String whereClause = "category like ?";
+        String[] whereArgs = {"%"+cate+"%"};
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        Cursor rs = sqLiteDatabase.query("items", null, whereClause, whereArgs,null,null,null);
+        while (rs != null && rs.moveToNext()) {
+            int id  = rs.getInt(0);
+            String t = rs.getString(1);
+            String category = rs.getString(2);
+            String price = rs.getString(3);
+            String date = rs.getString(4);
+            list.add(new Item( id, t,category,price,date));
+        }
+        return  list;
+    }
+
+    public List<Item> getItemByDateFromTo(String from, String to) {
+
+        List<Item> list = new ArrayList<>();
+        String whereClause = "date BETWEEN ? AND ?";
+        String[] whereArgs = {from.toString(), to.toString()};
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        Cursor rs = sqLiteDatabase.query("items", null, whereClause, whereArgs,null,null,null);
+        while (rs != null && rs.moveToNext()) {
+            int id  = rs.getInt(0);
+            String title = rs.getString(1);
+            String category = rs.getString(2);
+            String price = rs.getString(3);
+            String date = rs.getString(3);
+            list.add(new Item( id, title,category,price,date));
+        }
+        return  list;
+    }
 }

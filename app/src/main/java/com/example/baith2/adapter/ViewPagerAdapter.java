@@ -5,6 +5,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.example.baith2.fragment.FragmentHistory;
+import com.example.baith2.fragment.FragmentHome;
+import com.example.baith2.fragment.FragmentSearch;
+
 public class ViewPagerAdapter extends FragmentPagerAdapter {
     public ViewPagerAdapter(@NonNull FragmentManager fm) {
         super(fm);

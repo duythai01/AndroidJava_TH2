@@ -13,6 +13,7 @@
         android:queryHint="Nhap o day"
         />
     <EditText
+        android:id="@+id/eFrom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="13dp"
@@ -21,6 +22,7 @@
         android:layout_marginRight="12dp"
         />
     <EditText
+        android:id="@+id/eTo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="13dp"
@@ -60,6 +62,7 @@
         android:text="Tong: "
         />
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"

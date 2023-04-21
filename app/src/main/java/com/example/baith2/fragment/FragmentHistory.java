@@ -1,12 +1,11 @@
-package com.example.baith2.adapter;
-
+package com.example.baith2.fragment;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,23 +15,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.baith2.R;
 import com.example.baith2.UpdateActive;
+import com.example.baith2.adapter.RecycleViewAdapter;
 import com.example.baith2.dal.SQLiteHelper;
 import com.example.baith2.model.Item;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
-public class FragmentHome extends Fragment implements RecycleViewAdapter.ItemListener {
+public class FragmentHistory extends Fragment implements RecycleViewAdapter.ItemListener {
     private RecycleViewAdapter adapter;
     private RecyclerView recyclerView;
     private SQLiteHelper db;
-
-    private TextView tvTong;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home,container,false);
+        return inflater.inflate(R.layout.fragment_history,container,false);
     }
 
     @Override
@@ -41,26 +37,15 @@ public class FragmentHome extends Fragment implements RecycleViewAdapter.ItemLis
         recyclerView = view.findViewById(R.id.recycleView);
         adapter = new RecycleViewAdapter();
         db = new SQLiteHelper(getContext());
-        tvTong = view.findViewById(R.id.tvTong);
-         Date date = new Date();
-        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-        List<Item> list = db.getItemByDate(f.format(date));
+//        Item item = new Item(1,"Muaquan ao", "Mua sam","500","20/04/2023");
+//        db.insertToDB(item);
+        List<Item> list = db.getAll();
+//        list.add(new Item(1,"Muaquan ao", "Mua sam","500","28/03/2023" ));
         adapter.setList(list);
-        tvTong.setText("Tong tien: "+tongChi(list));
         LinearLayoutManager manager = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
         adapter.setItemListener(this);
-    }
-
-    private int tongChi(List<Item> list) {
-
-        int i =0;
-        for (Item item:list) {
-
-            i+= Integer.parseInt(item.getPrice());
-        }
-        return  i;
     }
 
     @Override
@@ -74,10 +59,7 @@ public class FragmentHome extends Fragment implements RecycleViewAdapter.ItemLis
     @Override
     public void onResume() {
         super.onResume();
-        Date date = new Date();
-        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-        List<Item> list = db.getItemByDate(f.format(date));
+        List<Item> list = db.getAll();
         adapter.setList(list);
-        tvTong.setText("Tong tien: "+tongChi(list));
     }
 }

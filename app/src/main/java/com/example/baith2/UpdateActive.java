@@ -7,6 +7,7 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -93,11 +94,16 @@ public class UpdateActive extends AppCompatActivity implements View.OnClickListe
             String p = ePrice.getText().toString();
             String c = sp.getSelectedItem().toString();
             String d = eDate.getText().toString();
+            Log.i("t", t);
+            Log.i("p", p);
+            Log.i("c", c);
+            Log.i("d", d);
+            Log.i("id", String.valueOf(item.getId()));
 
             if(!t.isEmpty() && p.matches("\\d+")) {
-                Item item = new Item(t,c,p,d);
+                Item i = new Item(item.getId(),t,c,p,d);
                 SQLiteHelper sqLiteHelper = new SQLiteHelper(this);
-                sqLiteHelper.update(item);
+                sqLiteHelper.update(i);
                 finish();
 
             }
